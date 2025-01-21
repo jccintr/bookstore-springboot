@@ -7,6 +7,7 @@ import java.util.Objects;
 import java.util.UUID;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -31,8 +32,8 @@ public class Publisher implements Serializable {
 	@Column(nullable = false)
 	private String name;
 
-	@JsonIgnore
-	@OneToMany(mappedBy = "publisher")
+	@JsonIgnore  //@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+	@OneToMany(mappedBy = "publisher") // fetch = FetchType.LAZY
 	private List<Book> books = new ArrayList<>();
 
 	public Publisher() {
@@ -59,6 +60,12 @@ public class Publisher implements Serializable {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+	
+	
+
+	public List<Book> getBooks() {
+		return books;
 	}
 
 	@Override

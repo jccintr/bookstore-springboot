@@ -11,7 +11,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.MapsId;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
@@ -28,12 +28,15 @@ public class Review implements Serializable {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private UUID id;
 	
-	@Column(nullable = false)
+	@Column(nullable = false,columnDefinition="TEXT")
 	private String comment;
 	
+	
+	
+	//@MapsId
 	@JsonIgnore
 	@OneToOne
-	@MapsId
+    @JoinColumn(name = "book_id")
 	private Book book;
 	
 	public Review() {
