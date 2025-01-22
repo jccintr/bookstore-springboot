@@ -36,18 +36,20 @@ public class Book {
 	@JoinTable(name="book_author",joinColumns=@JoinColumn(name="book_id"),inverseJoinColumns=@JoinColumn(name="author_id"))
 	private Set<Author> authors = new HashSet<>();
 	
-	@OneToOne(mappedBy="book",cascade=CascadeType.ALL)
-	private Review review;
+	
 
+	private String description;
+	
 	public Book() {
 
 	}
 
-	public Book(UUID id, String title, Publisher publisher) {
+	public Book(UUID id, String title, Publisher publisher,String description) {
 		super();
 		this.id = id;
 		this.title = title;
 		this.publisher = publisher;
+		this.description = description;
 	}
 
 	public UUID getId() {
@@ -74,13 +76,17 @@ public class Book {
 		this.publisher = publisher;
 	}
 
-	public Review getReview() {
-		return review;
+	
+
+	public String getDescription() {
+		return description;
 	}
 
-	public void setReview(Review review) {
-		this.review = review;
+	public void setDescription(String description) {
+		this.description = description;
 	}
+	
+	
 
 	@Override
 	public int hashCode() {
